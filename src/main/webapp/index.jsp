@@ -6,8 +6,8 @@
 	<link href="static/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<h1>SGI Tech War Project Version 3.0</h1>
-<p id="demo"> Locate User Position Application</p>
+	<h1>SGI Tech War Project Version 4.0</h1>
+<p id="demo"> Locate User Position Application - Pipeline Structure</p>
 
 <p>Click the button to get your coordinates.</p>
 
