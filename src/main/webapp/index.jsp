@@ -6,15 +6,19 @@
 	<link href="static/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<h1>SGI Tech War Project Version 2.0</h1>
+	<h1>SGI Tech War Project Version 3.0</h1>
 <p id="demo"> Locate User Position Application</p>
 
 <p>Click the button to get your coordinates.</p>
 
 <button onclick="getLocation()">Get My Location</button>
 
-<p id="demo"></p>
+<h1 style="background-color:DodgerBlue;">Hello World SGI Tech</h1>
 
+<p style="background-color:Tomato;">
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+</p>
 <script>
 var x = document.getElementById("demo");
 
