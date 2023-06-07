@@ -6,8 +6,14 @@
 	<link href="static/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<h1>SGI Tech War Project</h1>
-<p id="demo"> Locate User Position</p>
+	<h1>SGI Tech War Project Version 2.0</h1>
+<p id="demo"> Locate User Position Application</p>
+
+<p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Get My Location</button>
+
+<p id="demo"></p>
 
 <script>
 var x = document.getElementById("demo");
@@ -25,5 +31,6 @@ function showPosition(position) {
   "<br>Longitude: " + position.coords.longitude;
 }
 </script>
+	
 </body>
 </html>
