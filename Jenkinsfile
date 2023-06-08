@@ -16,9 +16,11 @@ pipeline {
         }
         stage('Push Artifacts to Nexus'){
             steps{
-              nexusArtifactUploader artifacts: [[artifactId: 'SGITech', 
+                script {
+                  def myPomFile = readMavenPom file: 'pom.xml'
+                  nexusArtifactUploader artifacts: [[artifactId: 'SGITech', 
                                                  classifier: '', 
-                                                 file: 'target/SGITech-1.0.0.war', 
+                                                 file: 'target/SGITech-${myPomFile.version}.war', 
                                                  type: 'war']], 
                   credentialsId: 'Nexus_login', 
                   groupId: 'sgi.web.war', 
@@ -26,15 +28,21 @@ pipeline {
                   nexusVersion: 'nexus3', 
                   protocol: 'http', 
                   repository: 'PreProdDevTest', 
-                  version: '1.0.0'
+                  version: '${myPomFile.version}'
+                }
+               
             }
         }
         stage('Deploy to Tomcat') {
             steps {
-             deploy adapters: [tomcat9(credentialsId: 'Tomcat_User', 
+                script{
+                    def myPomFile = readMavenPom file: 'pom.xml'
+                    deploy adapters: [tomcat9(credentialsId: 'Tomcat_User', 
                                        path: '', url: 'http://52.23.188.252:8080/manager')], 
                  contextPath: 'PipelineApp', 
-                 war: 'target/SGITech-1.0.0.war'
+                 war: 'target/SGITech-${myPomFile.version}.war'
+                }        
+
             }
         }
     }
