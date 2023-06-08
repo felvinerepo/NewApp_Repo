@@ -20,7 +20,7 @@ pipeline {
                   def myPomFile = readMavenPom file: 'pom.xml'
                   nexusArtifactUploader artifacts: [[artifactId: 'SGITech', 
                                                  classifier: '', 
-                                                 file: 'target/SGITech-${myPomFile.version}.war', 
+                                                 file: "target/SGITech-${myPomFile.version}.war", 
                                                  type: 'war']], 
                   credentialsId: 'Nexus_login', 
                   groupId: 'sgi.web.war', 
@@ -28,7 +28,7 @@ pipeline {
                   nexusVersion: 'nexus3', 
                   protocol: 'http', 
                   repository: 'ReleasesToProd', 
-                  version: '${myPomFile.version}'
+                  version: "${myPomFile.version}"
                 }
                
             }
@@ -40,7 +40,7 @@ pipeline {
                     deploy adapters: [tomcat9(credentialsId: 'Tomcat_User', 
                                        path: '', url: 'http://52.23.188.252:8080/manager')], 
                  contextPath: 'PipelineApp', 
-                 war: 'target/SGITech-${myPomFile.version}.war'
+                 war: "target/SGITech-${myPomFile.version}.war"
                 }        
 
             }
