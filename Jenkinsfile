@@ -27,7 +27,7 @@ pipeline {
                   nexusUrl: '44.204.55.59:8081', 
                   nexusVersion: 'nexus3', 
                   protocol: 'http', 
-                  repository: 'PreProdDevTest', 
+                  repository: 'ReleasesToProd', 
                   version: '${myPomFile.version}'
                 }
                
