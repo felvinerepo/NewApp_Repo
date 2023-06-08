@@ -1,47 +1,41 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven363'
-    }
-    options {
-        timeout(10)
-        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '5')
+           maven 'mavenjenk392'
     }
     stages {
-        stage('Build') {
+        stage('Get Code From SCM') {
             steps {
-                sh "mvn clean install"
+              git 'https://github.com/felvinerepo/NewApp_Repo'
             }
         }
-        stage('upload artifact to nexus') {
+        stage('Build Code Using Maven') {
             steps {
-                nexusArtifactUploader artifacts: [
-                    [
-                        artifactId: 'wwp', 
-                        classifier: '', 
-                        file: 'target/wwp-1.0.0.war', 
-                        type: 'war'
-                    ]
-                ], 
-                    credentialsId: 'nexus3', 
-                    groupId: 'koddas.web.war', 
-                    nexusUrl: '10.0.0.91:8081', 
-                    nexusVersion: 'nexus3', 
-                    protocol: 'http', 
-                    repository: 'samplerepo', 
-                    version: '1.0.0'
+                sh "mvn clean deploy"
             }
         }
-    }
-    post {
-        always{
-            deleteDir()
+        stage('Push Artifacts to Nexus'){
+            steps{
+              nexusArtifactUploader artifacts: [[artifactId: 'SGITech', 
+                                                 classifier: '', 
+                                                 file: 'target/SGITech-1.0.0-SNAPSHOT.war', 
+                                                 type: 'war']], 
+                  credentialsId: 'Nexus_login', 
+                  groupId: 'sgi.web.war', 
+                  nexusUrl: '44.204.55.59:8081', 
+                  nexusVersion: 'nexus3', 
+                  protocol: 'http', 
+                  repository: 'NexusandMavenRepo', 
+                  version: '1.0.0'
+            }
         }
-        failure {
-            echo "sendmail -s mvn build failed receipients@my.com"
-        }
-        success {
-            echo "The job is successful"
+        stage('Deploy to Tomcat') {
+            steps {
+             deploy adapters: [tomcat9(credentialsId: 'Tomcat_User', 
+                                       path: '', url: 'http://52.23.188.252:8080/manager')], 
+                 contextPath: 'PipelineApp', 
+                 war: 'target/SGITech-1.0.1-SNAPSHOT.war'
+            }
         }
     }
 }
