@@ -19,18 +19,6 @@
   		<scope>provided</scope>
   	</dependency>
   </dependencies>
-  <distributionManagement>
-        <repository>
-            <id>deployment</id>
-            <name>Internal Releases</name>
-            <url>http://172.31.82.212:8081/repository/ReleasesToProd/</url>
-        </repository>
-        <snapshotRepository>
-            <id>deployment</id>
-            <name>Internal Snapshot Releases</name>
-            <url>http://172.31.82.212:8081/repository/PreProdDevTest/</url>
-        </snapshotRepository>
-  </distributionManagement>
   <build>
     <plugins>
       <plugin>
