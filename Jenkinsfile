@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build Code Using Maven') {
             steps {
-                sh "mvn clean deploy"
+                sh "mvn clean install"
             }
         }
         stage('Push Artifacts to Nexus'){
