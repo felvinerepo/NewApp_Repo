@@ -25,7 +25,7 @@ pipeline {
                   nexusUrl: '44.204.55.59:8081', 
                   nexusVersion: 'nexus3', 
                   protocol: 'http', 
-                  repository: 'ReleasesToProd', 
+                  repository: 'PreProdDevTest', 
                   version: '1.0.0'
             }
         }
